@@ -44,7 +44,7 @@ subject_data <- rbind(subject_train,subject_test); names(subject_data) = "Subjec
 merged_data <- cbind(subject_data,y_data, x_data)
 
 #extract the measurements
-mean_std <- merged_data[,c(1,2,grep(('mean|std'),colnames(merged_data)))]
+mean_std <- merged_data[,c(1,2,3, grep(('mean|std'),colnames(merged_data)))]
 
 ############################
 #5 From the data set in step 4, creates a second, independent tidy data set with the average of each variable for each activity and each subject.
@@ -52,11 +52,9 @@ mean_std <- merged_data[,c(1,2,grep(('mean|std'),colnames(merged_data)))]
 
 #install.packages("reshape2")
 library(reshape2)
-library(dplyr)
 # Melt the data so we have a unique row for each combination of subject and acitivites
-melt_test <- melt(merged_data,id = c("Subject", "Activity"))
-
-tidy_data <- dcast(melt_test, Subject + Activity ~ variable, mean)
+melt_test <- melt(mean_std,id = c("Subject", "Activity"))
+tidy_data <- dcast(melt_test,formula = Subject +Activity~..., mean)
 
 #write/save tidy data as a text file
-write.table(tidy, file = "tidydata.txt",row.name=FALSE)
+write.table(tidy_data, file = "tidydata.txt",row.name=FALSE)
