@@ -12,11 +12,7 @@ Step 0: Download file, unzip file, and read in files.
 
 Step 1: Merges the training and the test sets to create one data set.
 
-Step 2: Extract only the measurements on the mean and standard deviation for each measurement for the data set in Step 1.
-
-Step 3: Uses descriptive activity names to name the activities in the data set.
-
-Step 4: Appropriately labels the data set with descriptive variable names (Subject and Activity).
+Step 2,3,4: After merging the data, I use the the features and labels as the column names so it's easier to extract mean and std using grep.
 
 Step 5: Then from the data set in step 4, creates a second, independent tidy data set with the average of each variable for each activity and each subject.
 
